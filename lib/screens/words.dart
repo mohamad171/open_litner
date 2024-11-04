@@ -12,6 +12,7 @@ class WordsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+          backgroundColor: Colors.grey[200],
       floatingActionButton: FloatingActionButton(
         splashColor: Colors.blueAccent,
         backgroundColor: Colors.blue,
