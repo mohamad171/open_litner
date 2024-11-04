@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:open_litner/constants/utils.dart';
 
 import '../widgets/word_widget.dart';
 
@@ -61,13 +62,9 @@ class WordsScreen extends StatelessWidget {
             confirmDismiss: (direction) async {
               if (direction == DismissDirection.startToEnd) {
                 // TODO Move word to next home
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Perfect, Word moved to next home')),
-                );
+                showMessage("Ok, Word moved to next home", context);
               } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Oh! Sorry, Word moved to first home.')),
-                );
+                showMessage('Oh! Sorry, Word moved to first home.', context);
               }
               return false;
             },

@@ -24,7 +24,7 @@ class OpenLitnerApp extends StatelessWidget {
           appBarTheme: AppBarTheme(
             color: Colors.blue,
           )),
-      initialRoute: '/home',
+      initialRoute: '/splash',
       initialBinding: OpenLitnerBinding(),
       defaultTransition: Transition.cupertino,
       getPages: Routes.page,
