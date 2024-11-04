@@ -14,7 +14,6 @@ class Logincontroller extends GetxController {
   User? user;
 
   void checkLogin(){
-      print("Check login");
        account!.get().then((value) {
          user = value;
          Get.offNamed("/home");
