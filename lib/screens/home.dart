@@ -1,50 +1,77 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:open_litner/controllers/HomeController.dart';
 import 'package:open_litner/widgets/box_widget.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends GetView<HomeController> {
   HomeScreen({super.key});
+
+  void init(){
+    controller.getBoxWordsCount(-1);
+    controller.getBoxWordsCount(0);
+    controller.getBoxWordsCount(1);
+    controller.getBoxWordsCount(2);
+    controller.getBoxWordsCount(3);
+    controller.getBoxWordsCount(4);
+
+  }
 
   @override
   Widget build(BuildContext context) {
+    Timer(Duration.zero,(){
+        init();
+    });
     return SafeArea(
         child: Scaffold(
       backgroundColor: Colors.grey[200],
-      body: Column(
+      body: Obx(() => Column(
         children: [
           SizedBox(
-            height: 150,
+            height: 75,
           ),
+          Row(children: [
+            ElevatedButton(onPressed: (){
+              init();
+
+            }, child: Icon(Icons.refresh))
+          ],),
+          
           Row(
             children: [
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    Get.toNamed("/words");
+                    Get.toNamed("/words",arguments: {"box":0});
                   },
                   child: BoxWidget(
                     title: 'Home 1',
-                    wordsCount: 87,
+                    wordsCount: controller.box0.value,
                     bgColor: Colors.blue.shade500,
                   ),
                 ),
               ),
               Expanded(
                   child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed("/words",arguments: {"box":1});
+                },
                 child: BoxWidget(
                     title: 'Home 2',
-                    wordsCount: 76,
+                    wordsCount: controller.box1.value,
                     bgColor: Colors.blue.shade600),
               )),
               Expanded(
                   child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed("/words",arguments: {"box":2});
+                },
                 child: BoxWidget(
                     title: 'Home 3',
-                    wordsCount: 3,
+                    wordsCount: controller.box2.value,
                     bgColor: Colors.blue.shade700),
               )),
             ],
@@ -56,18 +83,22 @@ class HomeScreen extends StatelessWidget {
             children: [
               Expanded(
                   child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed("/words",arguments: {"box":3});
+                },
                 child: BoxWidget(
                     title: 'Home 4',
-                    wordsCount: 8,
+                    wordsCount: controller.box3.value,
                     bgColor: Colors.blue.shade800),
               )),
               Expanded(
                   child: GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed("/words",arguments: {"box":4});
+                },
                 child: BoxWidget(
                     title: 'Home 5',
-                    wordsCount: 36,
+                    wordsCount:controller.box4.value,
                     bgColor: Colors.blue.shade900),
               )),
             ],
@@ -80,13 +111,13 @@ class HomeScreen extends StatelessWidget {
               Expanded(
                   child: BoxWidget(
                 title: 'Archive',
-                wordsCount: 8,
+                wordsCount: controller.archive.value,
                 bgColor: Colors.green,
               )),
             ],
           ),
         ],
-      ),
+      ),),
     ));
   }
 }

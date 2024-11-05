@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class WordWidget extends StatelessWidget {
-  const WordWidget({super.key});
+  WordWidget({super.key,required this.title});
+  String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class WordWidget extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.blue.shade100, borderRadius: BorderRadius.circular(10),
           ),
-          child: Text("Hello"),
+          child: Text("${title}"),
     );
   }
 }
