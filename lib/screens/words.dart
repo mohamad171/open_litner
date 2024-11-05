@@ -32,6 +32,7 @@ class WordsScreen extends GetView<Wordcontroller> {
         },
         child: InkWell(
           onTap: () {
+            
             Get.back();
           },
           child: Icon(
