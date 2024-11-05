@@ -66,6 +66,7 @@ class WordsScreen extends GetView<Wordcontroller> {
             itemCount: controller.listOfWords.length,
             itemBuilder: (context, index) {
               var item = controller.listOfWords[index];
+              print(item.data["description"]);
 
               return Dismissible(
                 key: Key(item.$id),
@@ -88,7 +89,7 @@ class WordsScreen extends GetView<Wordcontroller> {
                   }
                   return false;
                 },
-                child: WordWidget(title:item.data["title"]),
+                child: WordWidget(title:item.data["title"],description: item.data["description"],),
                 direction: DismissDirection.horizontal,
               );
             },
