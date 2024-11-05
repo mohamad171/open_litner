@@ -1,6 +1,7 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:get/get.dart';
 import 'package:open_litner/constants/strings.dart';
+import 'package:open_litner/controllers/LoginController.dart';
 
 class HomeController extends GetxController{
 Client client = Client();
@@ -16,7 +17,8 @@ var archive = 0.obs;
 void getBoxWordsCount(int index){
   if(database != null){
     database!.listDocuments(databaseId: litnerDB, collectionId: wordCollection,queries: [
-      Query.equal("index", [index])
+      Query.equal("index", [index]),
+      Query.equal("user_id", Get.find<Logincontroller>().user!.$id)
     ]).then((value) {
       switch(index){
         case -1:

@@ -24,13 +24,17 @@ class Logincontroller extends GetxController {
 
   }
   
+  void logOut(){
+    account!.deleteSessions();
+    Get.offNamed("/login");
+  }
 
   void logIn(String username, String password) {
     loginLoading(true);
     if(account != null){
       account!.createEmailPasswordSession(email: username,password: password).then((value) {
         loginLoading(false);
-        Get.offNamed("/home");
+        Get.offNamed("/splash");
       },).onError((error, stackTrace) {
         print(error);
         showMessage("Incorrect username or password", Get.context);

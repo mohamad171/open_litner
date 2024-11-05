@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:open_litner/constants/utils.dart';
 import 'package:open_litner/controllers/WordController.dart';
+import 'package:open_litner/main.dart';
 
 import '../widgets/word_widget.dart';
 
@@ -14,6 +15,7 @@ class WordsScreen extends GetView<Wordcontroller> {
 
   void init() {
     controller.getBoxWords(Get.arguments["box"]);
+    controller.boxNumber(Get.arguments['box']);
   }
 
   @override
@@ -25,35 +27,95 @@ class WordsScreen extends GetView<Wordcontroller> {
         child: Scaffold(
       backgroundColor: Colors.grey[200],
       floatingActionButton: FloatingActionButton(
+        
         splashColor: Colors.blueAccent,
         backgroundColor: Colors.blue,
         onPressed: () {
-          // TODO: Should add new Record dialog
+          
+            showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Enter Word'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: controller.wordEditingController,
+                decoration: InputDecoration(
+                  labelText: 'Word',
+                
+                ),
+              ),
+              TextField(
+                controller: controller.descriptionEditingController,
+                decoration: InputDecoration(
+                  labelText: 'Description',
+                ),
+                maxLines: 3,
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: Text('Cancel'),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue
+              ),
+              onPressed: () {
+                // final String title = _titleController.text;
+                // final String description = _descriptionController.text;
+                
+                // Navigator.of(context).pop({
+                //   'title': title,
+                //   'description': description,
+                // });
+                if(controller.wordEditingController.text.trim().length > 0 &&
+                controller.descriptionEditingController.text.trim().length > 0 ){
+
+                  controller.createWord(controller.wordEditingController.text.trim(),
+                   controller.descriptionEditingController.text.trim());
+
+
+                }
+              },
+              child: Obx(() => (controller.addWordLoading.isTrue) ? CircularProgressIndicator(color: Colors.white,) : Text('Submit',style: TextStyle(color: Colors.white),),),
+            ),
+          ],
+        );
+      },
+    );
+      
         },
-        child: InkWell(
-          onTap: () {
-            
-            Get.back();
-          },
-          child: Icon(
+        child: Icon(
             Icons.add,
             color: Colors.white,
           ),
-        ),
+     
       ),
       appBar: AppBar(
-        title: Text(
-          "Home ${Get.arguments['box'] + 1}",
+        title: Obx(() => Text(
+          "Home ${ controller.boxNumber.value + 1}",
           style: TextStyle(color: Colors.white),
-        ),
+        ),),
         elevation: 12,
         leading: Container(
           margin: EdgeInsets.only(left: 5),
           child: Row(
             children: [
-              Icon(
+              GestureDetector(
+                child: Icon(
                 Icons.arrow_back,
                 color: Colors.white,
+              ),
+              onTap: (){
+                Get.back();
+              },
               )
             ],
           ),
@@ -67,8 +129,6 @@ class WordsScreen extends GetView<Wordcontroller> {
             itemCount: controller.listOfWords.length,
             itemBuilder: (context, index) {
               var item = controller.listOfWords[index];
-              print(item.data["description"]);
-
               return Dismissible(
                 key: Key(item.$id),
                 background: Container(
@@ -83,10 +143,11 @@ class WordsScreen extends GetView<Wordcontroller> {
                 confirmDismiss: (direction) async {
                   if (direction == DismissDirection.startToEnd) {
                     // TODO Move word to next home
-                    showMessage("Ok, Word moved to next home", context);
+                    controller.correctWord(item.$id);
+                    
+
                   } else {
-                    showMessage(
-                        'Oh! Sorry, Word moved to first home.', context);
+                    controller.inCorrectWord(item.$id);
                   }
                   return false;
                 },

@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:open_litner/controllers/HomeController.dart';
+import 'package:open_litner/controllers/LoginController.dart';
 import 'package:open_litner/widgets/box_widget.dart';
 
 class HomeScreen extends GetView<HomeController> {
@@ -28,6 +29,14 @@ class HomeScreen extends GetView<HomeController> {
     return SafeArea(
         child: Scaffold(
       backgroundColor: Colors.grey[200],
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.red,
+        onPressed: (){
+          Get.find<Logincontroller>().logOut();
+
+      },
+      child: Icon(Icons.exit_to_app,color: Colors.white,),
+      ),
       body: Obx(() => Column(
         children: [
           SizedBox(

@@ -17,7 +17,7 @@ class WordWidget extends StatelessWidget {
       child: Container(
       width: Get.width,
       padding: EdgeInsets.symmetric(vertical: 10,horizontal: 5),
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       decoration: BoxDecoration(
           color: Colors.blue.shade100, borderRadius: BorderRadius.circular(10),
           ),
