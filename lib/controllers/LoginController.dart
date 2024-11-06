@@ -47,6 +47,7 @@ class Logincontroller extends GetxController {
   @override
   void onInit() {
     client.setProject('6727dd3300229057a75f');
+    client.setEndpoint("https://openlitner.moderndata.ir/v1");
     account = Account(client);
     super.onInit();
   }
