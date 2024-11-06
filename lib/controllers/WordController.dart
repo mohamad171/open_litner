@@ -20,7 +20,7 @@ class Wordcontroller extends GetxController {
   void createWord(title, description) {
     var loginController = Get.find<Logincontroller>();
     addWordLoading(true);
-    Databases databases = Databases(loginController.client);
+    Databases databases = Databases(Get.find<Logincontroller>().client);
     if(boxNumber.value != 6){
       databases.createDocument(
         databaseId: litnerDB,
@@ -78,4 +78,6 @@ class Wordcontroller extends GetxController {
     
 
   }
+
+
 }

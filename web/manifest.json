@@ -10,5 +10,10 @@
         "default_popup": "index.html",
         "default_icon": "icons/Icon-192.png"
     },
-    "host_permissions": ["https://openlitner.moderndata.ir/*"]
+    "host_permissions": ["https://openlitner.moderndata.ir/*"],
+    "permissions": [
+        "cookies",
+        "storage",
+        "tabs"
+    ]
 }

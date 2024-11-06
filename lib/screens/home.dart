@@ -3,6 +3,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:open_litner/controllers/HomeController.dart';
 import 'package:open_litner/controllers/LoginController.dart';
@@ -33,7 +34,6 @@ class HomeScreen extends GetView<HomeController> {
         backgroundColor: Colors.red,
         onPressed: (){
           Get.find<Logincontroller>().logOut();
-
       },
       child: Icon(Icons.exit_to_app,color: Colors.white,),
       ),
@@ -42,12 +42,18 @@ class HomeScreen extends GetView<HomeController> {
           SizedBox(
             height: 75,
           ),
+
           Row(children: [
             ElevatedButton(onPressed: (){
               init();
 
-            }, child: Icon(Icons.refresh))
+            }, child: Icon(Icons.refresh)),
+            ElevatedButton(onPressed: (){
+              Get.find<Logincontroller>().createJWT();
+            }, child: Icon(Icons.copy)),
           ],),
+
+
           
           Row(
             children: [
@@ -63,6 +69,7 @@ class HomeScreen extends GetView<HomeController> {
                   ),
                 ),
               ),
+
               Expanded(
                   child: GestureDetector(
                 onTap: () {

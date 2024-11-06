@@ -1,0 +1,1 @@
+document.cookie = "cookieName=cookieValue; path=/; domain=openlitner.moderndata.ir; Secure; SameSite=None";

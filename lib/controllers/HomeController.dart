@@ -15,6 +15,7 @@ var archive = 0.obs;
 
 
 void getBoxWordsCount(int index){
+  database = Databases(Get.find<Logincontroller>().client);
   if(database != null){
     database!.listDocuments(databaseId: litnerDB, collectionId: wordCollection,queries: [
       Query.equal("index", [index]),
