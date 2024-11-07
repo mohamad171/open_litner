@@ -32,25 +32,7 @@ class Logincontroller extends GetxController {
     },);
   }
   void checkLogin(){
-    if(kIsWeb){
-      if(box.read("jwt") != null){
-        client.setJWT(box.read("jwt"));
-        account = Account(client);
-        account!.get().then((value) {
-          user = value;
-          Get.offNamed("/home");
-
-
-
-        },).onError((error, stackTrace) {
-          Get.offNamed("/login-jwt");
-        },);
-
-      }else{
-        Get.toNamed("/login-jwt");
-      }
-
-    }else{
+  
       account!.get().then((value) {
         user = value;
         Get.offNamed("/home");
@@ -58,21 +40,20 @@ class Logincontroller extends GetxController {
 
 
       },).onError((error, stackTrace) {
+        print(error.toString());
         Get.offNamed("/login");
       },);
-    }
+    
 
       
 
   }
   
   void logOut(){
-    if(kIsWeb){
-      box.remove("jwt");
-    }else{
+    
       account!.deleteSessions();
       Get.offNamed("/login");
-    }
+    
 
   }
 
