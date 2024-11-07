@@ -151,7 +151,7 @@ class WordsScreen extends GetView<Wordcontroller> {
                   }
                   return false;
                 },
-                child: WordWidget(title:item.data["title"],description: item.data["description"],),
+                child: WordWidget(title:item.data["title"],description: item.data["description"],wordId: item.$id,),
                 direction: DismissDirection.horizontal,
               );
             },

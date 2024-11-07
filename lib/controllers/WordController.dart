@@ -55,7 +55,16 @@ class Wordcontroller extends GetxController {
       );
     
   }
+  void removeWord(wordId){
+    var loginController = Get.find<Logincontroller>();
+    Databases databases = Databases(loginController.client);
+    databases.deleteDocument(databaseId: litnerDB, collectionId: wordCollection, documentId: wordId).then((value) {
+      showMessage("Word removed successful", Get.context);
+      getBoxWords(boxNumber.value);
+      Get.back();
+    },);
 
+  }
   void correctWord(wordId){
     var loginController = Get.find<Logincontroller>();
     Databases databases = Databases(loginController.client);
